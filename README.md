@@ -32,3 +32,50 @@ https://github.com/netology-code/mnt-homeworks/tree/MNT-video/08-ansible-01-base
 4. Добавьте новую группу хостов `fedora`, самостоятельно придумайте для неё переменную. В качестве образа можно использовать [этот вариант](https://hub.docker.com/r/pycontribs/fedora).
 5. Напишите скрипт на bash: автоматизируйте поднятие необходимых контейнеров, запуск ansible-playbook и остановку контейнеров.
 6. Все изменения должны быть зафиксированы и отправлены в ваш личный репозиторий.
+
+
+## Решение основной части
+
+1. `ansible-playbook site.yml -i inventory/test.yml`
+![task_1](./screens/task_1.png)
+
+2. Меняем файл `group_vars/all/examp.yml`
+![task_2](./screens/task_2.png)
+
+3. Готовим окружение
+    ```
+    docker run -dit --name ubuntu ubuntu:latest
+    docker run -dit --name alma9 almalinux:9 # or rockylinux
+
+    ansible -m ping -i inventory/prod.yml all
+
+    docker exec -it ubuntu /bin/sh
+    apt update && apt install python3
+    exit
+
+    ansible -m ping -i inventory/prod.yml all
+    ```
+    ![task_3](./screens/task_3.png)
+
+4. `ansible-playbook site.yml -i inventory/prod.yml`
+![task_4](./screens/task_4.png)
+
+5. Поменяли group_vars
+6. Проверяем `ansible-playbook site.yml -i inventory/prod.yml`
+    ![task_5](./screens/task_5.png)
+
+7. Шифруем
+    ```
+    ansible-vault encrypt group_vars/deb/examp.yml
+    ansible-vault encrypt group_vars/el/examp.yml
+    ```
+    ![task_7](./screens/task_7.png)
+
+8. `ansible-playbook site.yml -i inventory/prod.yml --ask-vault-pass`
+    ![task_8](./screens/task_8.png)
+
+9. Для просмотра списка плагинов можно использовать `ansible-doc -l`. Для моей control-node подойдёт плагин local
+
+10. Поменяли inventory/prod.yml, добавив туда localhost
+11. `ansible-playbook site.yml -i inventory/prod.yml --ask-vault-pass`
+    ![task_10](./screens/task_10.png)
