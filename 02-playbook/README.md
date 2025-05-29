@@ -24,4 +24,23 @@ https://github.com/netology-code/mnt-homeworks/tree/MNT-video/08-ansible-02-play
 
 ## Решение основной части
 
-...
+0. Готовим окружение
+    ```
+    alma8
+    https://github.com/Spardoks/TerraformLibvirtTesting/blob/main/main.tf
+    terraform apply
+
+    python3 -m venv venv
+    source venv/bin/activate
+    # Удалить текущую версию Ansible
+    pip uninstall ansible-core
+    # Установить Ansible 2.16 для совместимости с python 3.6 из alma8 
+    # https://docs.ansible.com/ansible/latest/reference_appendices/python_3_support.html
+    pip install ansible-core==2.16.8
+
+    ansible --version
+    ansible -m ping -i inventory/prod.yml clickhouse-01
+    ansible-playbook site.yml -i inventory/prod.yml
+
+    ```
+    ![task_0](./screens/task_0.png)

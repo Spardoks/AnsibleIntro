@@ -1,6 +1,6 @@
 ---
 - name: Install Clickhouse
-  hosts: clickhouse
+  hosts: clickhouse-01
   handlers:
     - name: Start clickhouse service
       become: true
@@ -26,6 +26,7 @@
           - clickhouse-common-static-{{ clickhouse_version }}.rpm
           - clickhouse-client-{{ clickhouse_version }}.rpm
           - clickhouse-server-{{ clickhouse_version }}.rpm
+        disable_gpg_check: yes
       notify: Start clickhouse service
     - name: Flush handlers
       meta: flush_handlers

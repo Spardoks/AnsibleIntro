@@ -2,4 +2,6 @@
 clickhouse:
   hosts:
     clickhouse-01:
-      ansible_host: <IP_here>
+      ansible_host: 192.168.122.5
+      ansible_user: linux
+      ansible_password: linux
