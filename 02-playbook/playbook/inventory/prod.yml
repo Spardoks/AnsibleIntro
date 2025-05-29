@@ -5,3 +5,9 @@ clickhouse:
       ansible_host: 192.168.122.5
       ansible_user: linux
       ansible_password: linux
+vector:
+  hosts:
+    vector-01:
+      ansible_host: 192.168.122.5
+      ansible_user: linux
+      ansible_password: linux

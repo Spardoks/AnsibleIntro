@@ -43,4 +43,13 @@ https://github.com/netology-code/mnt-homeworks/tree/MNT-video/08-ansible-02-play
     ansible-playbook site.yml -i inventory/prod.yml
 
     ```
-    ![task_0](./screens/task_0.png)
+    ![task_0](./screens/task_0.png)  
+
+1-4. Добавляем новый хост в inventory, добавляем новую группу переменных, добавляем playbook в site.yml, lj,добавляем шаблоны  
+5. Запускаем `ansible-lint site.yml` и исправляем ошибки  
+6. Запускаем playbook с флагом check `ansible-playbook site.yml -i inventory/prod.yml --check` - check выдаёт ошибку, потому что не может найти пакет для установки, а также запустить сервис  
+7. Запускаем playbook с флагом diff `ansible-playbook site.yml -i inventory/prod.yml --diff`
+    ![task_7](./screens/task_7.png)
+8. Запускаем playbook с флагом diff повторно `ansible-playbook site.yml -i inventory/prod.yml --diff` - изменений не видим
+    ![task_8](./screens/task_8.png)
+9. Готовим [Readme](./playbook/README.md)
