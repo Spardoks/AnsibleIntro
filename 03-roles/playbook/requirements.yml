@@ -3,3 +3,11 @@
     scm: git
     version: "1.13"
     name: clickhouse
+  - src: https://github.com/Spardoks/AnsibleIntro
+    scm: git
+    version: "vector_role_1.0.0"
+    name: vector-role
+  - src: https://github.com/Spardoks/AnsibleIntro
+    scm: git
+    version: "lighthouse_role_1.0.0"
+    name: lighthouse-role

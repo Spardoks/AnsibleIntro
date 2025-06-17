@@ -58,8 +58,28 @@ pip uninstall ansible-core
 pip install ansible-core==2.16.8
 
 ansible --version
+
+ansible-galaxy install -r requirements.yml -p roles
 ansible -m ping -i inventory/prod.yml all
 ansible-playbook site.yml -i inventory/prod.yml
 ```
 
 Если возникнут проблемы с ролью `AlexeySetevoi/ansible-clickhouse`, которая активируется через `site.yml` playbook, то можно использовать `site_local_clickhouse_task.yml`, который оттестирован на окружении выше
+
+### Особенности создания удалённых ролей
+
+```
+git checkout -b vectore-role
+# clear no need files
+git commit -m "Task #3: create Vector-role to use in ansible reqs"
+git tag -a vector_role_1.0.0 -m "Vector role ready"
+git push origin vector_role_1.0.0
+
+
+git checkout -b lighthouse-role
+# clear no need files
+git commit -m "Task #3: create Lighthouse-role to use in ansible reqs"
+git tag -a lighthouse_role_1.0.0 -m "Lighthouse role ready"
+git push origin lighthouse_role_1.0.0
+
+```
