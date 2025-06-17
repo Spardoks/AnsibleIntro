@@ -4,7 +4,7 @@ https://github.com/netology-code/mnt-homeworks/blob/MNT-video/08-ansible-04-role
 
 ## Подготовка к выполнению
 
-1. * Необязательно. Познакомьтесь с [LightHouse](https://youtu.be/ymlrNlaHzIY?t=929).
+1. Познакомьтесь с [LightHouse](https://youtu.be/ymlrNlaHzIY?t=929).
 2. Создайте два пустых публичных репозитория в любом своём проекте: vector-role и lighthouse-role.
 3. Добавьте публичную часть своего ключа к своему профилю на GitHub.
 
@@ -28,13 +28,38 @@ https://github.com/netology-code/mnt-homeworks/blob/MNT-video/08-ansible-04-role
        name: clickhouse 
    ```
 
-2. При помощи `ansible-galaxy` скачайте себе эту роль.
-3. Создайте новый каталог с ролью при помощи `ansible-galaxy role init vector-role`.
+2. При помощи `ansible-galaxy` скачайте себе эту роль. (`cd playbook && ansible-galaxy install -r requirements.yml -p roles`)
+3. Создайте новый каталог с ролью при помощи `ansible-galaxy role init vector-role`. (`cd roles && ansible-galaxy role init vector-role`)
 4. На основе tasks из старого playbook заполните новую role. Разнесите переменные между `vars` и `default`. 
 5. Перенести нужные шаблоны конфигов в `templates`.
 6. Опишите в `README.md` обе роли и их параметры. Пример качественной документации ansible role [по ссылке](https://github.com/cloudalchemy/ansible-prometheus).
-7. Повторите шаги 3–6 для LightHouse. Помните, что одна роль должна настраивать один продукт.
+7. Повторите шаги 3–6 для LightHouse. Помните, что одна роль должна настраивать один продукт. (`cd roles && ansible-galaxy role init lighthouse--role`)
 8. Выложите все roles в репозитории. Проставьте теги, используя семантическую нумерацию. Добавьте roles в `requirements.yml` в playbook.
 9. Переработайте playbook на использование roles. Не забудьте про зависимости LightHouse и возможности совмещения `roles` с `tasks`.
 10. Выложите playbook в репозиторий.
 11. В ответе дайте ссылки на оба репозитория с roles и одну ссылку на репозиторий с playbook.
+
+---
+## Выполнение основной части и её особенности
+
+Для подготовки окружения можно использовать данные артефакты https://github.com/Spardoks/AnsibleIntro/tree/main/02-playbook/TerraformLibvirtTesting
+
+```
+# alma8
+# https://github.com/Spardoks/TerraformLibvirtTesting/blob/main/main.tf
+terraform apply
+
+python3 -m venv venv
+source venv/bin/activate
+# Удалить текущую версию Ansible
+pip uninstall ansible-core
+# Установить Ansible 2.16 для совместимости с python 3.6 из alma8 
+# https://docs.ansible.com/ansible/latest/reference_appendices/python_3_support.html
+pip install ansible-core==2.16.8
+
+ansible --version
+ansible -m ping -i inventory/prod.yml all
+ansible-playbook site.yml -i inventory/prod.yml
+```
+
+Если возникнут проблемы с ролью `AlexeySetevoi/ansible-clickhouse`, которая активируется через `site.yml` playbook, то можно использовать `site_local_clickhouse_task.yml`, который оттестирован на окружении выше

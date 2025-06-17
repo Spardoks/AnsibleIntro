@@ -11,3 +11,9 @@ vector:
       ansible_host: 192.168.122.5
       ansible_user: linux
       ansible_password: linux
+lighthouse:
+  hosts:
+    lighthouse-01:
+      ansible_host: 192.168.122.5
+      ansible_user: linux
+      ansible_password: linux
